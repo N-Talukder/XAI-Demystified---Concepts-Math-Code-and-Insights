@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+#- file: chapter1_shap
+#- file: chapter2_lime
+#- file: chapter3_integrated_gradients
+#- file: chapter4_feature_importance
+#- file: chapter5_counterfactuals
+
+format: jb-book
+root: intro
+chapters:
+- file: chapter1_shap
+- file: 'notebooks/Dummy model2'
+  title: "SHAP Analysis Example Notebook"
+- file: chapter6_shapiq
+- file: 'notebooks/Dummy model2 copy'
+  title: "SHAPIQ Analysis Example Notebook"
+- file: 'notebooks/Dummy model'
+  title: "SHAP and SHAPIQ Comparison Notebook"
+  
