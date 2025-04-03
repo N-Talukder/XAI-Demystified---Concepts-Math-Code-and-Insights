@@ -1,0 +1,1106 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SHAPIQ Library Tools &#8212; XAI Demystified -  Concepts, Math, Code, and Insights</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Dummy model2 copy';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SHAP and SHAPIQ Comparison Notebook" href="Dummy%20model.html" />
+    <link rel="prev" title="SHAPIQ (2024)" href="../chapter6_shapiq.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="XAI Demystified -  Concepts, Math, Code, and Insights - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="XAI Demystified -  Concepts, Math, Code, and Insights - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../chapter1_shap.html">SHAP (2017)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dummy%20model2.html">SHAP Analysis Example Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6_shapiq.html">SHAPIQ (2024)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SHAPIQ Analysis Example Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dummy%20model.html">SHAP and SHAPIQ Comparison Notebook</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Dummy model2 copy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SHAPIQ Library Tools</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-preprocessing-model-training-testing-evaluation-metrices">1. Dataset preprocessing, Model Training, Testing, Evaluation Metrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-explanation-plots">2. Global Explanation Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-the-bar-plot-below-is-based-on-feature-interaction-caclculations-until-order-2">i. The bar plot below is based on feature interaction caclculations until order 2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-my-calculation-there-should-be-12c1-12c2-12c0-12-66-1-79-values-calculated-for-each-data-point-when-they-are-saying-that-they-are-calculating-interactions-until-order2-but-there-are-77-values-here-what-happens-to-the-remaining-2-values">In my calculation, there should be (12C1 + 12C2 + 12C0 = 12 + 66 + 1) = 79 values calculated for each data point when they are saying that they are calculating interactions until order2. But there are 77 values here. What happens to the remaining 2 values?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-the-bar-plot-below-is-based-on-all-feature-interactions">iii. The bar plot below is based on all feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-explanation-plots">3. Local Explanation Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-force-plot">i. Force Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-interaction-values-for-order-1-2-and-all-features">Calculating interaction values for order 1, 2, and all features:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-interactions-of-order-1-since-it-is-limited-to-order-1-only-it-should-be-the-same-as-shap-values">Visualizing Interactions of order 1 (since it is limited to order 1 only, it should be the same as SHAP values):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-interactions-of-order-until-2">Visualizing interactions of order until 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-all-feature-interactions">Visualizing All feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-waterfall-plot">ii. Waterfall Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-order-1-the-same-as-shap-values">Visualizing Feature Interactions until order 1 (the same as SHAP values):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-order-2">Visualizing Feature Interactions until order 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-impact-of-all-feature-interactions">Visualizing the impact of all feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-network-plot">iii. Network Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-network-plot-for-interaction-order-until-2">Visualizing Network Plot for interaction order until 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-network-plot-for-all-interaction-orders">Visualizing Network Plot for all interaction orders:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-si-graph-plot">iii. SI Graph Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-first-order-in-si-graph-plot-this-makes-this-an-alternative-to">Visualizing feature interactions until first order in SI Graph Plot (this makes this an alternative to ):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-second-order-in-si-graph-plot">Visualizing feature interactions until second order in SI Graph Plot:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-all-feature-interactions-in-si-graph-plot">Visualizing all feature interactions in SI Graph Plot:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="shapiq-library-tools">
+<h1>SHAPIQ Library Tools<a class="headerlink" href="#shapiq-library-tools" title="Link to this heading">#</a></h1>
+<p>SHAPIQ library has offers different visualizations. These are introduced here.</p>
+<ol class="arabic simple">
+<li><p>Dataset preprocessing, Model Training, Testing, Evaluation Metrices</p></li>
+<li><p>Global Explanation Plots</p></li>
+<li><p>Local Explanation Plots</p></li>
+</ol>
+<section id="dataset-preprocessing-model-training-testing-evaluation-metrices">
+<h2>1. Dataset preprocessing, Model Training, Testing, Evaluation Metrices<a class="headerlink" href="#dataset-preprocessing-model-training-testing-evaluation-metrices" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the libraries not installed</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install matplotlib</span>
+<span class="c1">#!pip install pandas</span>
+<span class="c1">#!pip install scikit-learn</span>
+<span class="c1">#!pip install xgboost</span>
+<span class="c1">#!pip install shapiq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xgb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapiq</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drop_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;symmetry_worst&#39;</span><span class="p">,</span> <span class="s1">&#39;area_worst&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetry_se&#39;</span><span class="p">,</span><span class="s1">&#39;radius_mean&#39;</span><span class="p">,</span><span class="s1">&#39;concave points_worst&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;compactness_se&#39;</span><span class="p">,</span> <span class="s1">&#39;concavity_se&#39;</span><span class="p">,</span><span class="s1">&#39;smoothness_se&#39;</span><span class="p">,</span><span class="s1">&#39;perimeter_mean&#39;</span><span class="p">,</span><span class="s1">&#39;concave points_mean&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;texture_se&#39;</span><span class="p">,</span><span class="s1">&#39;radius_se&#39;</span><span class="p">,</span><span class="s1">&#39;smoothness_mean&#39;</span><span class="p">,</span><span class="s1">&#39;texture_mean&#39;</span><span class="p">,</span><span class="s1">&#39;concave points_se&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;area_mean&#39;</span><span class="p">,</span><span class="s1">&#39;compactness_mean&#39;</span><span class="p">,</span><span class="s1">&#39;perimeter_worst&#39;</span><span class="p">,</span><span class="s1">&#39;Unnamed: 32&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="c1">#importing our cancer dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_list</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Encoding categorical data values</span>
+<span class="n">labelencoder_Y</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">labelencoder_Y</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">()</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+<span class="n">Y_pred</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">Y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">Y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98        90
+           1       0.95      0.98      0.96        53
+
+    accuracy                           0.97       143
+   macro avg       0.97      0.97      0.97       143
+weighted avg       0.97      0.97      0.97       143
+
+[[87  3]
+ [ 1 52]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set feature names to classifier</span>
+<span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="global-explanation-plots">
+<h2>2. Global Explanation Plots<a class="headerlink" href="#global-explanation-plots" title="Link to this heading">#</a></h2>
+<section id="i-the-bar-plot-below-is-based-on-feature-interaction-caclculations-until-order-2">
+<h3>i. The bar plot below is based on feature interaction caclculations until order 2:<a class="headerlink" href="#i-the-bar-plot-below-is-based-on-feature-interaction-caclculations-until-order-2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">explanations_si</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> <span class="n">max_order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;k-SII&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">instance_id</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))):</span>
+    <span class="n">x_explain</span> <span class="o">=</span> <span class="n">X_test_scaled</span><span class="p">[</span><span class="n">instance_id</span><span class="p">]</span>
+    <span class="n">si</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_explain</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">explanations_si</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">si</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shapiq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">explanations_si</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a792feb39cc40004fcd4882abf85290ed871a798e5df2dd47b97987ad48ce8fb.png" src="../_images/a792feb39cc40004fcd4882abf85290ed871a798e5df2dd47b97987ad48ce8fb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">explanations_si</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">interaction_lookup</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(): 0,
+ (np.int64(0),): 1,
+ (np.int64(3),): 2,
+ (np.int64(5),): 3,
+ (np.int64(6),): 4,
+ (np.int64(7),): 5,
+ (np.int64(9),): 6,
+ (np.int64(11),): 7,
+ (np.int64(0), np.int64(3)): 8,
+ (np.int64(0), np.int64(5)): 9,
+ (np.int64(0), np.int64(6)): 10,
+ (np.int64(0), np.int64(7)): 11,
+ (np.int64(0), np.int64(9)): 12,
+ (np.int64(0), np.int64(11)): 13,
+ (np.int64(3), np.int64(5)): 14,
+ (np.int64(3), np.int64(6)): 15,
+ (np.int64(3), np.int64(7)): 16,
+ (np.int64(3), np.int64(9)): 17,
+ (np.int64(3), np.int64(11)): 18,
+ (np.int64(5), np.int64(6)): 19,
+ (np.int64(5), np.int64(7)): 20,
+ (np.int64(5), np.int64(9)): 21,
+ (np.int64(5), np.int64(11)): 22,
+ (np.int64(6), np.int64(7)): 23,
+ (np.int64(6), np.int64(9)): 24,
+ (np.int64(6), np.int64(11)): 25,
+ (np.int64(7), np.int64(9)): 26,
+ (np.int64(7), np.int64(11)): 27,
+ (np.int64(9), np.int64(11)): 28,
+ (np.int64(1),): 29,
+ (np.int64(4),): 30,
+ (np.int64(8),): 31,
+ (np.int64(10),): 32,
+ (np.int64(1), np.int64(4)): 33,
+ (np.int64(1), np.int64(6)): 34,
+ (np.int64(1), np.int64(7)): 35,
+ (np.int64(1), np.int64(8)): 36,
+ (np.int64(1), np.int64(9)): 37,
+ (np.int64(1), np.int64(10)): 38,
+ (np.int64(4), np.int64(6)): 39,
+ (np.int64(4), np.int64(7)): 40,
+ (np.int64(4), np.int64(8)): 41,
+ (np.int64(4), np.int64(9)): 42,
+ (np.int64(4), np.int64(10)): 43,
+ (np.int64(6), np.int64(8)): 44,
+ (np.int64(6), np.int64(10)): 45,
+ (np.int64(7), np.int64(8)): 46,
+ (np.int64(7), np.int64(10)): 47,
+ (np.int64(8), np.int64(9)): 48,
+ (np.int64(8), np.int64(10)): 49,
+ (np.int64(9), np.int64(10)): 50,
+ (np.int64(2),): 51,
+ (np.int64(0), np.int64(2)): 52,
+ (np.int64(0), np.int64(4)): 53,
+ (np.int64(0), np.int64(10)): 54,
+ (np.int64(2), np.int64(3)): 55,
+ (np.int64(2), np.int64(4)): 56,
+ (np.int64(2), np.int64(6)): 57,
+ (np.int64(2), np.int64(7)): 58,
+ (np.int64(2), np.int64(10)): 59,
+ (np.int64(3), np.int64(4)): 60,
+ (np.int64(3), np.int64(10)): 61,
+ (np.int64(0), np.int64(1)): 62,
+ (np.int64(1), np.int64(5)): 63,
+ (np.int64(4), np.int64(5)): 64,
+ (np.int64(5), np.int64(10)): 65,
+ (np.int64(0), np.int64(8)): 66,
+ (np.int64(2), np.int64(8)): 67,
+ (np.int64(2), np.int64(9)): 68,
+ (np.int64(1), np.int64(11)): 69,
+ (np.int64(4), np.int64(11)): 70,
+ (np.int64(8), np.int64(11)): 71,
+ (np.int64(5), np.int64(8)): 72,
+ (np.int64(3), np.int64(8)): 73,
+ (np.int64(1), np.int64(3)): 74,
+ (np.int64(2), np.int64(5)): 75,
+ (np.int64(2), np.int64(11)): 76}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">explanations_si</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="in-my-calculation-there-should-be-12c1-12c2-12c0-12-66-1-79-values-calculated-for-each-data-point-when-they-are-saying-that-they-are-calculating-interactions-until-order2-but-there-are-77-values-here-what-happens-to-the-remaining-2-values">
+<h3>In my calculation, there should be (12C1 + 12C2 + 12C0 = 12 + 66 + 1) = 79 values calculated for each data point when they are saying that they are calculating interactions until order2. But there are 77 values here. What happens to the remaining 2 values?<a class="headerlink" href="#in-my-calculation-there-should-be-12c1-12c2-12c0-12-66-1-79-values-calculated-for-each-data-point-when-they-are-saying-that-they-are-calculating-interactions-until-order2-but-there-are-77-values-here-what-happens-to-the-remaining-2-values" title="Link to this heading">#</a></h3>
+<p>Question: I further looked up into all the combinations above and found out that the listed interactions are missing these - (np.int64(1), np.int64(2)) and (np.int64(10), np.int64(11)) interactions. Isn’t this a mistake that invalidates the library’s calculations, since they are disregarding these feature combinations altogether, and all other calculations using this library are based on these interaction calculations?</p>
+</section>
+<section id="iii-the-bar-plot-below-is-based-on-all-feature-interactions">
+<h3>iii. The bar plot below is based on all feature interactions:<a class="headerlink" href="#iii-the-bar-plot-below-is-based-on-all-feature-interactions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">explanations_mi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> <span class="n">max_order</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;k-SII&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">instance_id</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))):</span>
+    <span class="n">x_explain</span> <span class="o">=</span> <span class="n">X_test_scaled</span><span class="p">[</span><span class="n">instance_id</span><span class="p">]</span>
+    <span class="n">mi</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_explain</span><span class="p">)</span>
+    <span class="n">explanations_mi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shapiq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar_plot</span><span class="p">(</span><span class="n">explanations_mi</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ff689b950f6a085f59b58a489cbdc90e14a42e106cef14c7397530a9e50de9ee.png" src="../_images/ff689b950f6a085f59b58a489cbdc90e14a42e106cef14c7397530a9e50de9ee.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">explanations_mi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>778
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-explanation-plots">
+<h2>3. Local Explanation Plots<a class="headerlink" href="#local-explanation-plots" title="Link to this heading">#</a></h2>
+<p>Selecting instance from the test dataset to explain</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">explain_instance</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints and returns the actual values, scaled values, and prediction for a selected instance.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        classifier  : Trained model with feature names</span>
+<span class="sd">        X_test      : DataFrame of test features (actual values)</span>
+<span class="sd">        X_test_scaled : Scaled version of X_test (numpy array)</span>
+<span class="sd">        Y_test      : True labels for the test set</span>
+<span class="sd">        instance_id : Index of the instance to be explained</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Contains actual values, scaled values, true label, and predicted value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_explain_actual</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">instance_id</span><span class="p">]</span>
+    <span class="n">x_explain_scaled</span> <span class="o">=</span> <span class="n">X_test_scaled</span><span class="p">[</span><span class="n">instance_id</span><span class="p">]</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">Y_test</span><span class="p">[</span><span class="n">instance_id</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_explain_scaled</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Print formatted output</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;Feature Name&#39;</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}{</span><span class="s1">&#39;Actual Value&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="s1">&#39;Scaled Value&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">feature</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}{</span><span class="n">x_explain_actual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}{</span><span class="n">x_explain_scaled</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Instance ID     : </span><span class="si">{</span><span class="n">instance_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True Value      : </span><span class="si">{</span><span class="n">y_true</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted Value : </span><span class="si">{</span><span class="n">y_pred</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;actual_values&quot;</span><span class="p">:</span> <span class="n">x_explain_actual</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+        <span class="s2">&quot;scaled_values&quot;</span><span class="p">:</span> <span class="n">x_explain_scaled</span><span class="p">,</span>
+        <span class="s2">&quot;true_label&quot;</span><span class="p">:</span> <span class="n">y_true</span><span class="p">,</span>
+        <span class="s2">&quot;predicted_label&quot;</span><span class="p">:</span> <span class="n">y_pred</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="i-force-plot">
+<h3>i. Force Plot<a class="headerlink" href="#i-force-plot" title="Link to this heading">#</a></h3>
+<section id="calculating-interaction-values-for-order-1-2-and-all-features">
+<h4>Calculating interaction values for order 1, 2, and all features:<a class="headerlink" href="#calculating-interaction-values-for-order-1-2-and-all-features" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="c1"># selecting an instance from the test dataset to explain using SHAPIQ</span>
+<span class="n">instance_id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">explain_this_record</span> <span class="o">=</span> <span class="n">explain_instance</span><span class="p">(</span><span class="n">classifier</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> <span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">X_test_scaled</span><span class="o">=</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">=</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">instance_id</span><span class="o">=</span><span class="n">instance_id</span><span class="p">)</span>
+
+<span class="c1"># create explanations for different orders</span>
+<span class="n">si_order</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">InteractionValues</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)]):</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="s2">&quot;k-SII&quot;</span> <span class="k">if</span> <span class="n">order</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;SV&quot;</span>  <span class="c1"># will also be set automatically by the explainer</span>
+    <span class="n">explainer</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">classifier</span><span class="p">,</span> <span class="n">max_order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">si_order</span><span class="p">[</span><span class="n">order</span><span class="p">]</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">explain_this_record</span><span class="p">[</span><span class="s1">&#39;scaled_values&#39;</span><span class="p">])</span>
+<span class="n">si_order</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-interactions-of-order-1-since-it-is-limited-to-order-1-only-it-should-be-the-same-as-shap-values">
+<h4>Visualizing Interactions of order 1 (since it is limited to order 1 only, it should be the same as SHAP values):<a class="headerlink" href="#visualizing-interactions-of-order-1-since-it-is-limited-to-order-1-only-it-should-be-the-same-as-shap-values" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sv</span> <span class="o">=</span> <span class="n">si_order</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># get the SV</span>
+
+<span class="n">sv</span><span class="o">.</span><span class="n">plot_force</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f106063e18824759aada1acf4b32001350e9f3f188ca2ec8e10b5d3ae9ed9571.png" src="../_images/f106063e18824759aada1acf4b32001350e9f3f188ca2ec8e10b5d3ae9ed9571.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-interactions-of-order-until-2">
+<h4>Visualizing interactions of order until 2:<a class="headerlink" href="#visualizing-interactions-of-order-until-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">si</span> <span class="o">=</span> <span class="n">si_order</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># get the 2-SII</span>
+
+<span class="n">si</span><span class="o">.</span><span class="n">plot_force</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6cce20ff022eccdf3e579ed681ea38e145dbada6a95da4551c4fcbcb6afc05ac.png" src="../_images/6cce20ff022eccdf3e579ed681ea38e145dbada6a95da4551c4fcbcb6afc05ac.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-all-feature-interactions">
+<h4>Visualizing All feature interactions:<a class="headerlink" href="#visualizing-all-feature-interactions" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span> <span class="o">=</span> <span class="n">si_order</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)]</span>  <span class="c1"># get the Moebius transform</span>
+
+<span class="n">mi</span><span class="o">.</span><span class="n">plot_force</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3aef33f3f602b0e126c772c5aa94103a875c3d31419fa0b2600b178d80981bdb.png" src="../_images/3aef33f3f602b0e126c772c5aa94103a875c3d31419fa0b2600b178d80981bdb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model prediction in log-odds space: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">explain_this_record</span><span class="p">[</span><span class="s1">&#39;scaled_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">explain_this_record</span><span class="p">[</span><span class="s1">&#39;scaled_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model prediction in log-odds space:  6.552892
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, sum of the shap values and baseline_value is also not equal to the model’s output in the log-odds space.</p>
+</section>
+</section>
+<section id="ii-waterfall-plot">
+<h3>ii. Waterfall Plot<a class="headerlink" href="#ii-waterfall-plot" title="Link to this heading">#</a></h3>
+<section id="visualizing-feature-interactions-until-order-1-the-same-as-shap-values">
+<h4>Visualizing Feature Interactions until order 1 (the same as SHAP values):<a class="headerlink" href="#visualizing-feature-interactions-until-order-1-the-same-as-shap-values" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sv</span><span class="o">.</span><span class="n">plot_waterfall</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">abbreviate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d1051749ab165f66fc5abdd1f99486e99b4728bad16b68538ee172b71ea0bad2.png" src="../_images/d1051749ab165f66fc5abdd1f99486e99b4728bad16b68538ee172b71ea0bad2.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-feature-interactions-until-order-2">
+<h4>Visualizing Feature Interactions until order 2:<a class="headerlink" href="#visualizing-feature-interactions-until-order-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">si</span><span class="o">.</span><span class="n">plot_waterfall</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">abbreviate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e45372bfe17f299db60bdc7ee8bb6843c61b3427000c65e0d49f9a5a42875a7a.png" src="../_images/e45372bfe17f299db60bdc7ee8bb6843c61b3427000c65e0d49f9a5a42875a7a.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-the-impact-of-all-feature-interactions">
+<h4>Visualizing the impact of all feature interactions:<a class="headerlink" href="#visualizing-the-impact-of-all-feature-interactions" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span><span class="o">.</span><span class="n">plot_waterfall</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">abbreviate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4364a02703a0ba80547726dd917796c6a6b03c1ab7c14616a2c90ddd4c47bdc8.png" src="../_images/4364a02703a0ba80547726dd917796c6a6b03c1ab7c14616a2c90ddd4c47bdc8.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="iii-network-plot">
+<h3>iii. Network Plot<a class="headerlink" href="#iii-network-plot" title="Link to this heading">#</a></h3>
+<p>Network Plot notes:</p>
+<ol class="arabic simple">
+<li><p>The network plot visualizes all first- and second-order interactions of computed Shapley Interactions.</p></li>
+<li><p>It does plot all second order interactions.</p></li>
+<li><p>Color Scheme: positive interactions are shown in red, negative interactions in blue.</p></li>
+<li><p>The strength of an interaction is encoded in the width of the edge connecting the two features.</p></li>
+<li><p>The strength of a first-order interaction is encoded in the size of the node for the respective feature.</p></li>
+<li><p>The second-order interactions are also plotted with a decreasing opacity depending on the strength of the interaction.</p></li>
+</ol>
+<section id="visualizing-network-plot-for-interaction-order-until-2">
+<h4>Visualizing Network Plot for interaction order until 2:<a class="headerlink" href="#visualizing-network-plot-for-interaction-order-until-2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">si</span><span class="o">.</span><span class="n">plot_network</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">draw_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4c51039a9686b3607acec68c0de0a41056165ba5f03db79f72ac1896948bf89e.png" src="../_images/4c51039a9686b3607acec68c0de0a41056165ba5f03db79f72ac1896948bf89e.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-network-plot-for-all-interaction-orders">
+<h4>Visualizing Network Plot for all interaction orders:<a class="headerlink" href="#visualizing-network-plot-for-all-interaction-orders" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span><span class="o">.</span><span class="n">plot_network</span><span class="p">(</span><span class="n">feature_names</span><span class="o">=</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">draw_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a7358e96dd033ace4ea0e94b8db15563eddc508ec9b2cfb6b9e12b3cb24ae2f4.png" src="../_images/a7358e96dd033ace4ea0e94b8db15563eddc508ec9b2cfb6b9e12b3cb24ae2f4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="iii-si-graph-plot">
+<h3>iii. SI Graph Plot<a class="headerlink" href="#iii-si-graph-plot" title="Link to this heading">#</a></h3>
+<p>SI Graph notes:</p>
+<ol class="arabic simple">
+<li><p>The nodes are the features,</p></li>
+<li><p>The edges are the interactions between the features.</p></li>
+<li><p>Interactions between more than two features are visualized as a hyper-edge.</p></li>
+<li><p>Color scheme: red for positive interactions, blue for negative interactions.</p></li>
+<li><p>The strength of an interaction is encoded in the width of the edge connecting the two features.</p></li>
+<li><p>The strength of a first-order interaction is encoded in the size of the node for the respective feature.</p></li>
+<li><p>The transparency of the edge/node is used to encode the strength of the interaction/feature attribution.</p></li>
+</ol>
+<section id="visualizing-feature-interactions-until-first-order-in-si-graph-plot-this-makes-this-an-alternative-to">
+<h4>Visualizing feature interactions until first order in SI Graph Plot (this makes this an alternative to ):<a class="headerlink" href="#visualizing-feature-interactions-until-first-order-in-si-graph-plot-this-makes-this-an-alternative-to" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we abbreviate the feature names since, they are plotted inside the nodes</span>
+<span class="n">abbrev_feature_names</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">abbreviate_feature_names</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">sv</span><span class="o">.</span><span class="n">plot_si_graph</span><span class="p">(</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="n">abbrev_feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size_factor</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">node_size_scaling</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/619bf17ccd4f70c3993e0ea8a4296fdb09204de45bf1cc50ee2b7b06ecf90b02.png" src="../_images/619bf17ccd4f70c3993e0ea8a4296fdb09204de45bf1cc50ee2b7b06ecf90b02.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-feature-interactions-until-second-order-in-si-graph-plot">
+<h4>Visualizing feature interactions until second order in SI Graph Plot:<a class="headerlink" href="#visualizing-feature-interactions-until-second-order-in-si-graph-plot" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we abbreviate the feature names since, they are plotted inside the nodes</span>
+<span class="n">abbrev_feature_names</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">abbreviate_feature_names</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">si</span><span class="o">.</span><span class="n">plot_si_graph</span><span class="p">(</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="n">abbrev_feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size_factor</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">node_size_scaling</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/194547a2b5c5185dfb8c750f3af459f9a004488ff52300b8faff1f55f05d1ab0.png" src="../_images/194547a2b5c5185dfb8c750f3af459f9a004488ff52300b8faff1f55f05d1ab0.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-all-feature-interactions-in-si-graph-plot">
+<h4>Visualizing all feature interactions in SI Graph Plot:<a class="headerlink" href="#visualizing-all-feature-interactions-in-si-graph-plot" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we abbreviate the feature names since, they are plotted inside the nodes</span>
+<span class="n">abbrev_feature_names</span> <span class="o">=</span> <span class="n">shapiq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">abbreviate_feature_names</span><span class="p">(</span><span class="n">classifier</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">mi</span><span class="o">.</span><span class="n">plot_si_graph</span><span class="p">(</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="n">abbrev_feature_names</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size_factor</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">node_size_scaling</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04ae75842f7fb3987caae06081ad431a38d477fe1f99142b86767334b0d54624.png" src="../_images/04ae75842f7fb3987caae06081ad431a38d477fe1f99142b86767334b0d54624.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../chapter6_shapiq.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SHAPIQ (2024)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Dummy%20model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SHAP and SHAPIQ Comparison Notebook</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-preprocessing-model-training-testing-evaluation-metrices">1. Dataset preprocessing, Model Training, Testing, Evaluation Metrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-explanation-plots">2. Global Explanation Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-the-bar-plot-below-is-based-on-feature-interaction-caclculations-until-order-2">i. The bar plot below is based on feature interaction caclculations until order 2:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-my-calculation-there-should-be-12c1-12c2-12c0-12-66-1-79-values-calculated-for-each-data-point-when-they-are-saying-that-they-are-calculating-interactions-until-order2-but-there-are-77-values-here-what-happens-to-the-remaining-2-values">In my calculation, there should be (12C1 + 12C2 + 12C0 = 12 + 66 + 1) = 79 values calculated for each data point when they are saying that they are calculating interactions until order2. But there are 77 values here. What happens to the remaining 2 values?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-the-bar-plot-below-is-based-on-all-feature-interactions">iii. The bar plot below is based on all feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-explanation-plots">3. Local Explanation Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-force-plot">i. Force Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-interaction-values-for-order-1-2-and-all-features">Calculating interaction values for order 1, 2, and all features:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-interactions-of-order-1-since-it-is-limited-to-order-1-only-it-should-be-the-same-as-shap-values">Visualizing Interactions of order 1 (since it is limited to order 1 only, it should be the same as SHAP values):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-interactions-of-order-until-2">Visualizing interactions of order until 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-all-feature-interactions">Visualizing All feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-waterfall-plot">ii. Waterfall Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-order-1-the-same-as-shap-values">Visualizing Feature Interactions until order 1 (the same as SHAP values):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-order-2">Visualizing Feature Interactions until order 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-impact-of-all-feature-interactions">Visualizing the impact of all feature interactions:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-network-plot">iii. Network Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-network-plot-for-interaction-order-until-2">Visualizing Network Plot for interaction order until 2:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-network-plot-for-all-interaction-orders">Visualizing Network Plot for all interaction orders:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-si-graph-plot">iii. SI Graph Plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-first-order-in-si-graph-plot-this-makes-this-an-alternative-to">Visualizing feature interactions until first order in SI Graph Plot (this makes this an alternative to ):</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-feature-interactions-until-second-order-in-si-graph-plot">Visualizing feature interactions until second order in SI Graph Plot:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-all-feature-interactions-in-si-graph-plot">Visualizing all feature interactions in SI Graph Plot:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nirzor Talukder
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 Nirzor Talukder.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

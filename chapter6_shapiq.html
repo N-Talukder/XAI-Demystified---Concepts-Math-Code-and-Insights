@@ -1,0 +1,554 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SHAPIQ (2024) &#8212; XAI Demystified -  Concepts, Math, Code, and Insights</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter6_shapiq';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SHAPIQ Library Tools" href="notebooks/Dummy%20model2%20copy.html" />
+    <link rel="prev" title="SHAP Library Tools" href="notebooks/Dummy%20model2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpg" class="logo__image only-light" alt="XAI Demystified -  Concepts, Math, Code, and Insights - Home"/>
+    <script>document.write(`<img src="_static/logo.jpg" class="logo__image only-dark" alt="XAI Demystified -  Concepts, Math, Code, and Insights - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1_shap.html">SHAP (2017)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Dummy%20model2.html">SHAP Analysis Example Notebook</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SHAPIQ (2024)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Dummy%20model2%20copy.html">SHAPIQ Analysis Example Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Dummy%20model.html">SHAP and SHAPIQ Comparison Notebook</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter6_shapiq.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SHAPIQ (2024)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cooperative-game-with-three-players">Cooperative Game with Three Players</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-index-representation">Interaction Index Representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-index-calculation-for-1-2">Interaction Index Calculation for <span class="math notranslate nohighlight">\( \{1, 2\} \)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-derivative-calculation">Discrete Derivative Calculation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-interaction-index-formula">Final Interaction Index Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function-definition">Value Function Definition</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="shapiq-2024">
+<h1>SHAPIQ (2024)<a class="headerlink" href="#shapiq-2024" title="Link to this heading">#</a></h1>
+<p>SHAPIQ is a Python library designed for computing and analyzing Shapley Interactions (SIs) of any order, which can reveal synergies and redundancies between entities in machine learning tasks. It provides a general interface for state-of-the-art SI algorithms, an explanation API for interpreting model predictions using SIs, and tools for benchmarking and visualizing these interactions across various machine learning domains, offering a more comprehensive understanding of feature relationships than traditional Shapley Values.</p>
+<section id="cooperative-game-with-three-players">
+<h2>Cooperative Game with Three Players<a class="headerlink" href="#cooperative-game-with-three-players" title="Link to this heading">#</a></h2>
+<p>Consider a cooperative game with three players. So, set <span class="math notranslate nohighlight">\(N = \{1, 2, 3\}\)</span>.
+And let the value function <span class="math notranslate nohighlight">\( v(S) \)</span> define the payout for each possible coalition <span class="math notranslate nohighlight">\(S \subseteq N\)</span>.
+So the possible combinations for the game are as follows:</p>
+<ul class="simple">
+<li><p><strong>Order 0 interactions:</strong> <span class="math notranslate nohighlight">\( \{\} \)</span></p></li>
+<li><p><strong>Order 1 interactions:</strong> <span class="math notranslate nohighlight">\( \{1\}, \{2\}, \{3\} \)</span></p></li>
+<li><p><strong>Order 2 interactions:</strong> <span class="math notranslate nohighlight">\( \{1, 2\}, \{2, 3\}, \{1, 3\} \)</span></p></li>
+<li><p><strong>Order 3 interactions:</strong> <span class="math notranslate nohighlight">\( \{1, 2, 3\} \)</span></p></li>
+</ul>
+<p>With SHAPIQ, we are interested in the calculation of interactions like these: <span class="math notranslate nohighlight">\( \{1, 2\}, \{2, 3\}, \{1, 3\}, \{1, 2, 3\} \)</span>.</p>
+</section>
+<section id="interaction-index-representation">
+<h2>Interaction Index Representation<a class="headerlink" href="#interaction-index-representation" title="Link to this heading">#</a></h2>
+<p>Interaction Index is represented by:</p>
+<div class="math notranslate nohighlight">
+\[ \Phi^{II}(S) = \sum_{T\subseteq N \setminus S }^{} p^{|S|}_{|T|}(n) \Delta_{S}(T) \]</div>
+<p>Here,</p>
+<div class="math notranslate nohighlight">
+\[ p^{|S|}_{|T|}(n) = \frac{1}{(n-s+1) (\binom{n-s}{t})} \]</div>
+<div class="math notranslate nohighlight">
+\[ \Delta_{S}(T) = \textnormal{Discrete derivative for } S \subseteq N \textnormal{ in the presence of } T \subseteq N \setminus S \]</div>
+</section>
+<section id="interaction-index-calculation-for-1-2">
+<h2>Interaction Index Calculation for <span class="math notranslate nohighlight">\( \{1, 2\} \)</span><a class="headerlink" href="#interaction-index-calculation-for-1-2" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ \Phi^{II}(\{1, 2\}) = \sum_{T\subseteq \{1, 2, 3\} \setminus \{1, 2\} }^{} \frac{1}{(3-2+1)(\binom{3-2}{t})} \Delta_{\{1, 2\}}(T) \]</div>
+<p>Here, the possible cases of <span class="math notranslate nohighlight">\(T\)</span> are <span class="math notranslate nohighlight">\(\{\}\)</span> and <span class="math notranslate nohighlight">\(\{3\}\)</span>.</p>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[ \Phi^{II}(\{1, 2\}) = \frac{1}{(3-2+1)(\binom{3-2}{0})} \Delta_{\{1, 2\}}(\{\}) + \frac{1}{(3-2+1)(\binom{3-2}{1})} \Delta_{\{1, 2\}}(\{3\}) \]</div>
+<section id="discrete-derivative-calculation">
+<h3>Discrete Derivative Calculation<a class="headerlink" href="#discrete-derivative-calculation" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ \Delta_{\{1, 2\}}(\{\}) = \sum_{L\subseteq S }^{} (-1)^{|S|-|L|} v(\{T \cup L\}) \]</div>
+<div class="math notranslate nohighlight">
+\[ \Delta_{\{1, 2\}}(\{\}) = \sum_{L\subseteq S }^{} (-1)^{2-|L|} v(\{\{\} \cup L\}) \]</div>
+<p>Possible values for <span class="math notranslate nohighlight">\(L\)</span> are <span class="math notranslate nohighlight">\(\{\}, \{1\}, \{2\}, \{1, 2\}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \Delta_{\{1, 2\}}(\{\}) = v(\{\}) -  v(\{1\}) - v(\{2\}) + v(\{1, 2\}) \]</div>
+<p>For <span class="math notranslate nohighlight">\( \Delta_{\{1, 2\}}(\{3\}) \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Delta_{\{1, 2\}}(\{3\}) = \sum_{L\subseteq S }^{} (-1)^{|S|-|L|} v(\{T \cup L\}) \]</div>
+<div class="math notranslate nohighlight">
+\[ \Delta_{\{1, 2\}}(\{3\}) = v(\{3\}) -  v(\{1, 3\}) - v(\{2, 3\}) + v(\{1, 2, 3\}) \]</div>
+</section>
+</section>
+<section id="final-interaction-index-formula">
+<h2>Final Interaction Index Formula<a class="headerlink" href="#final-interaction-index-formula" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[ \Phi^{II}(\{1, 2\}) = \frac{1}{2} \left( v(\{\}) -  v(\{1\}) - v(\{2\}) + v(\{1, 2\}) \right) + \frac{1}{2} \left( v(\{3\}) -  v(\{1, 3\}) - v(\{2, 3\}) + v(\{1, 2, 3\}) \right) \]</div>
+</section>
+<section id="value-function-definition">
+<h2>Value Function Definition<a class="headerlink" href="#value-function-definition" title="Link to this heading">#</a></h2>
+<p>Now, we need to get the values from the value function for the terms:
+<span class="math notranslate nohighlight">\( v(\{\}), v(\{1\}), v(\{2\}), v(\{3\}), v(\{1, 2\}), v(\{2, 3\}), v(\{1, 3\}), v(\{1, 2, 3\}) \)</span>.</p>
+<p>Here, <span class="math notranslate nohighlight">\(v\)</span> is the value function representing the worth of a coalition (e.g., the model’s prediction with a subset of features).</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(v(\{\})\)</span>: The value for the empty coalition, meaning it holds the value when no features are added. This is the model’s base value or the prediction without any feature information.</p></li>
+<li><p>For any other coalition <span class="math notranslate nohighlight">\(v(\{S\})\)</span>, it is obtained by evaluating the model (or its conditional expectation) on the input where only the features in <span class="math notranslate nohighlight">\(S\)</span> are present, and other features are handled (e.g., by marginalization or conditioning).</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="notebooks/Dummy%20model2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SHAP Library Tools</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="notebooks/Dummy%20model2%20copy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SHAPIQ Library Tools</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cooperative-game-with-three-players">Cooperative Game with Three Players</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-index-representation">Interaction Index Representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaction-index-calculation-for-1-2">Interaction Index Calculation for <span class="math notranslate nohighlight">\( \{1, 2\} \)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-derivative-calculation">Discrete Derivative Calculation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-interaction-index-formula">Final Interaction Index Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function-definition">Value Function Definition</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nirzor Talukder
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 Nirzor Talukder.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
